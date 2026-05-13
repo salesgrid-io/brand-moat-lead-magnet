@@ -3,1190 +3,273 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brand MOAT Audit — Urban Unity</title>
+<title>The Brand MOAT — Circumstantial Leverage</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0C0A08;
-    --bg-card: #6B5A38;
-    --bg-card-dark: #564830;
-    --bg-elevated: #12100D;
-    --gold: #C4A855;
-    --gold-dim: rgba(196,168,85,0.15);
-    --gold-border: rgba(196,168,85,0.28);
-    --text: #F0EBE1;
-    --text-dim: rgba(240,235,225,0.58);
-    --text-faint: rgba(240,235,225,0.28);
-    --pill: #1A1712;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html, body {
-    min-height: 100vh;
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% -10%, rgba(196,168,85,0.07) 0%, transparent 55%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .wrap {
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 20px 100px;
-  }
-
-  /* ── Progress ── */
-  .progress-bar {
-    width: 100%;
-    max-width: 700px;
-    margin-bottom: 36px;
-    display: none;
-  }
-
-  .progress-track {
-    width: 100%;
-    height: 3px;
-    background: rgba(240,235,225,0.08);
-    border-radius: 100px;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background: var(--gold);
-    border-radius: 100px;
-    transition: width 0.5s ease;
-    width: 0%;
-  }
-
-  .progress-meta {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 9px;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-faint);
-  }
-
-  /* ── Screens ── */
-  .screen {
-    display: none;
-    width: 100%;
-    max-width: 700px;
-    animation: fadeUp 0.38s ease forwards;
-  }
-  .screen.active { display: block; }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ── Step pill ── */
-  .step-pill {
-    display: inline-block;
-    background: var(--pill);
-    border: 1px solid rgba(240,235,225,0.1);
-    color: var(--text);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 8px 20px;
-    border-radius: 100px;
-    margin-bottom: 26px;
-  }
-
-  /* ── Headings ── */
-  .screen-title {
-    font-size: clamp(26px, 5vw, 42px);
-    font-weight: 900;
-    letter-spacing: -0.02em;
-    line-height: 1.08;
-    text-transform: uppercase;
-    color: var(--text);
-    margin-bottom: 10px;
-  }
-
-  .screen-title .accent {
-    color: var(--gold);
-    text-decoration: underline;
-    text-decoration-color: var(--gold);
-    text-underline-offset: 4px;
-  }
-
-  .screen-sub {
-    font-size: 15px;
-    line-height: 1.65;
-    color: var(--text-dim);
-    margin-bottom: 32px;
-    max-width: 580px;
-  }
-
-  .cat-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 8px;
-  }
-
-  /* ── Question accordion cards (matching reference) ── */
-  .q-card {
-    background: var(--bg-card);
-    border-radius: 12px;
-    margin-bottom: 10px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-
-  .q-card:hover { background: #7A6845; }
-
-  .q-card-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 18px 22px;
-    gap: 16px;
-    user-select: none;
-  }
-
-  .q-card-text {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text);
-    line-height: 1.4;
-    flex: 1;
-  }
-
-  .q-icon {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 1.5px solid rgba(240,235,225,0.35);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    line-height: 1;
-    flex-shrink: 0;
-    transition: all 0.2s;
-    color: var(--text);
-    font-weight: 300;
-  }
-
-  .q-card.open .q-icon {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: #0C0A08;
-    transform: rotate(45deg);
-    font-weight: 700;
-  }
-
-  .q-card-body {
-    display: none;
-    padding: 0 22px 18px;
-    cursor: default;
-  }
-
-  .q-card.open .q-card-body { display: block; }
-
-  /* ── Answer options ── */
-  .opts {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .opt {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 13px 16px;
-    background: rgba(0,0,0,0.28);
-    border: 1.5px solid rgba(240,235,225,0.1);
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    color: var(--text);
-    transition: border-color 0.15s, background 0.15s;
-  }
-
-  .opt:hover {
-    border-color: var(--gold);
-    background: rgba(196,168,85,0.1);
-  }
-
-  .opt.selected {
-    border-color: var(--gold);
-    background: rgba(196,168,85,0.15);
-  }
-
-  .opt-radio {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border: 1.5px solid rgba(240,235,225,0.35);
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.15s;
-  }
-
-  .opt.selected .opt-radio {
-    background: var(--gold);
-    border-color: var(--gold);
-  }
-
-  .opt.selected .opt-radio::after {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #0C0A08;
-  }
-
-  /* ── Buttons ── */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border: none;
-    cursor: pointer;
-    transition: opacity 0.15s, transform 0.1s;
-    border-radius: 8px;
-  }
-
-  .btn:active { transform: scale(0.98); }
-
-  .btn-gold {
-    background: var(--gold);
-    color: #0C0A08;
-    font-size: 14px;
-    padding: 15px 30px;
-  }
-
-  .btn-gold:hover { opacity: 0.88; }
-
-  .btn-gold.lg {
-    font-size: 16px;
-    padding: 18px 40px;
-    width: 100%;
-    border-radius: 10px;
-  }
-
-  .btn-ghost {
-    background: none;
-    color: var(--text-dim);
-    font-size: 13px;
-    padding: 15px 20px;
-    border: 1.5px solid rgba(240,235,225,0.14);
-  }
-
-  .btn-ghost:hover {
-    border-color: rgba(240,235,225,0.32);
-    color: var(--text);
-  }
-
-  .nav-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 30px;
-    gap: 12px;
-  }
-
-  /* ── Divider ── */
-  .divider {
-    width: 100%;
-    height: 1px;
-    background: rgba(240,235,225,0.07);
-    margin: 30px 0;
-  }
-
-  /* ── INTRO screen ── */
-  .intro-wrap {
-    text-align: center;
-    padding: 56px 0 40px;
-  }
-
-  .intro-eyebrow {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.26em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 22px;
-    display: block;
-  }
-
-  .intro-h1 {
-    font-size: clamp(44px, 9vw, 80px);
-    font-weight: 900;
-    line-height: 0.92;
-    letter-spacing: -0.03em;
-    text-transform: uppercase;
-    color: var(--text);
-    margin-bottom: 18px;
-  }
-
-  .intro-h1 .gold { color: var(--gold); display: block; }
-
-  .intro-desc {
-    font-size: clamp(15px, 2.2vw, 17px);
-    line-height: 1.7;
-    color: var(--text-dim);
-    max-width: 500px;
-    margin: 0 auto 36px;
-  }
-
-  .pillars {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 8px;
-    margin-bottom: 36px;
-  }
-
-  .pillar {
-    background: var(--bg-card);
-    border-radius: 10px;
-    padding: 16px 8px;
-    text-align: center;
-  }
-
-  .pillar-icon { font-size: 22px; display: block; margin-bottom: 6px; }
-
-  .pillar-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text);
-    line-height: 1.3;
-  }
-
-  .quote-block {
-    border-left: 3px solid var(--gold);
-    padding: 16px 20px;
-    margin: 0 auto 36px;
-    background: rgba(196,168,85,0.06);
-    border-radius: 0 10px 10px 0;
-    text-align: left;
-    max-width: 560px;
-  }
-
-  .quote-block p {
-    font-size: 15px;
-    font-style: italic;
-    line-height: 1.65;
-    color: var(--text-dim);
-  }
-
-  .quote-block cite {
-    display: block;
-    margin-top: 8px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-style: normal;
-  }
-
-  /* ── RESULTS ── */
-  .moat-card {
-    background: var(--bg-card);
-    border-radius: 14px;
-    padding: 28px;
-    margin-bottom: 12px;
-  }
-
-  .result-tag {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 10px;
-  }
-
-  .moat-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    background: var(--gold);
-    color: #0C0A08;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 7px 16px;
-    border-radius: 100px;
-    margin-bottom: 16px;
-  }
-
-  .moat-headline {
-    font-size: clamp(22px, 4vw, 32px);
-    font-weight: 900;
-    letter-spacing: -0.02em;
-    text-transform: uppercase;
-    color: var(--text);
-    margin-bottom: 10px;
-    line-height: 1.1;
-  }
-
-  .moat-desc {
-    font-size: 14px;
-    line-height: 1.65;
-    color: var(--text-dim);
-  }
-
-  .section-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--text-faint);
-    margin-bottom: 14px;
-  }
-
-  .angle-card {
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(240,235,225,0.08);
-    border-radius: 10px;
-    padding: 16px 18px;
-    margin-bottom: 9px;
-  }
-
-  .angle-type {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 6px;
-  }
-
-  .angle-text {
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--text);
-    font-weight: 500;
-  }
-
-  .anti-copy {
-    background: rgba(196,168,85,0.08);
-    border: 1px solid var(--gold-border);
-    border-radius: 12px;
-    padding: 20px 22px;
-  }
-
-  .anti-copy-label {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 10px;
-  }
-
-  .anti-copy-text {
-    font-size: 15px;
-    font-style: italic;
-    line-height: 1.65;
-    color: var(--text);
-    font-weight: 500;
-  }
-
-  .secondary-row {
-    background: var(--bg-elevated);
-    border: 1px solid rgba(240,235,225,0.07);
-    border-radius: 12px;
-    padding: 15px 18px;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .secondary-icon { font-size: 22px; flex-shrink: 0; }
-
-  .secondary-info { flex: 1; }
-
-  .secondary-name {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 3px;
-  }
-
-  .secondary-hl {
-    font-size: 14px;
-    color: var(--text-dim);
-  }
-
-  .secondary-pct {
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--text);
-  }
-
-  .bar-row { margin-bottom: 14px; }
-
-  .bar-label-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
-  }
-
-  .bar-name {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text);
-  }
-
-  .bar-pct {
-    font-size: 13px;
-    font-weight: 700;
-  }
-
-  .bar-track {
-    height: 6px;
-    background: rgba(240,235,225,0.08);
-    border-radius: 100px;
-    overflow: hidden;
-  }
-
-  .bar-fill {
-    height: 100%;
-    border-radius: 100px;
-    transition: width 1s ease;
-  }
-
-  .cta-box {
-    background: linear-gradient(135deg, rgba(196,168,85,0.1) 0%, rgba(80,62,32,0.18) 100%);
-    border: 1px solid var(--gold-border);
-    border-radius: 16px;
-    padding: 32px;
-    text-align: center;
-    margin-top: 14px;
-  }
-
-  .cta-box h3 {
-    font-size: 20px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: -0.01em;
-    color: var(--text);
-    margin-bottom: 8px;
-  }
-
-  .cta-box p {
-    font-size: 14px;
-    color: var(--text-dim);
-    line-height: 1.65;
-    margin-bottom: 24px;
-    max-width: 440px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  @media (max-width: 560px) {
-    .pillars { grid-template-columns: repeat(3, 1fr); }
-    .pillars .pillar:nth-child(4),
-    .pillars .pillar:nth-child(5) { grid-column: span 1; }
-    .moat-card { padding: 20px; }
-    .cta-box { padding: 22px; }
-  }
-
-  @media (max-width: 380px) {
-    .pillars { grid-template-columns: repeat(2, 1fr); }
-  }
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g:#C9A84C;--gl:#E8CB7A;--gd:#9A7228;
+  --gbr:rgba(201,168,76,0.28);
+  --ink:#0a0a0a;--ink2:#111;--ink3:#181818
+}
+body{font-family:'IBM Plex Mono',monospace;color:#d4c9ad;background:var(--ink);min-height:100vh;display:flex;justify-content:center;padding:2rem 1rem}
+.wrap{width:100%;max-width:680px}
+
+/* ── Hero ── */
+.hero{background:var(--ink);padding:2.2rem 2rem 1.8rem;border-bottom:1px solid var(--gbr);position:relative;overflow:hidden}
+.hero-hatch{position:absolute;inset:0;background:repeating-linear-gradient(62deg,transparent 0,transparent 18px,rgba(201,168,76,0.03) 18px,rgba(201,168,76,0.03) 19px),repeating-linear-gradient(-62deg,transparent 0,transparent 26px,rgba(201,168,76,0.025) 26px,rgba(201,168,76,0.025) 27px);pointer-events:none}
+.eye{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--g);margin-bottom:.4rem}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:60px;line-height:.9;color:#f0e6cc;letter-spacing:.03em;position:relative;z-index:1;margin-bottom:.7rem}
+.hero h1 em{color:var(--g);font-style:normal;text-decoration:underline;text-decoration-color:var(--gd);text-underline-offset:4px}
+.hero-desc{font-size:11px;line-height:1.75;color:#a89e84;max-width:430px;position:relative;z-index:1;letter-spacing:.02em}
+
+/* ── Stats ── */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--gbr)}
+.stat{background:var(--ink2);padding:.9rem 1rem;text-align:center;border-right:1px solid var(--gbr);position:relative;overflow:hidden}
+.stat:last-child{border-right:none}
+.stat-hatch{position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent 0,transparent 5px,rgba(201,168,76,0.05) 5px,rgba(201,168,76,0.05) 6px);pointer-events:none}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--g);line-height:1;position:relative;z-index:1}
+.stat-lbl{font-size:9px;color:#7a7260;margin-top:3px;line-height:1.5;letter-spacing:.04em;position:relative;z-index:1}
+
+/* ── Body ── */
+.body{padding:1.5rem 2rem 2.5rem}
+
+/* ── Eq block ── */
+.eq-block{border-left:3px solid var(--g);padding:.9rem 1.1rem;margin-bottom:1.5rem;background:var(--ink2);position:relative;overflow:hidden}
+.eq-hatch{position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent 0,transparent 9px,rgba(201,168,76,0.04) 9px,rgba(201,168,76,0.04) 10px);pointer-events:none}
+.eq-formula{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#f0e6cc;letter-spacing:.07em;position:relative;z-index:1}
+.eq-formula em{color:var(--g);font-style:normal}
+.eq-quote{font-size:11px;line-height:1.7;color:#9a9080;font-style:italic;margin-top:.5rem;position:relative;z-index:1}
+
+/* ── Section header ── */
+.sec-hd{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--g);padding-bottom:7px;border-bottom:1px solid var(--gbr);margin-bottom:1rem;display:flex;align-items:center;gap:6px}
+.sec-hd::before{content:'//';color:#3a3628}
+
+/* ── Two-column paths ── */
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.5rem}
+.path{padding:1rem 1.1rem;border:1px solid #1d1d1d;background:var(--ink2);position:relative;overflow:hidden}
+.path-hatch{position:absolute;inset:0;background:repeating-linear-gradient(72deg,transparent 0,transparent 11px,rgba(201,168,76,0.03) 11px,rgba(201,168,76,0.03) 12px);pointer-events:none}
+.path.hi{border-color:var(--gbr);background:#0c0a00}
+.path-title{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.07em;color:#4a4638;margin-bottom:4px;position:relative;z-index:1}
+.path.hi .path-title{color:var(--g)}
+.path-desc{font-size:11px;color:#5a5444;line-height:1.6;position:relative;z-index:1}
+.path.hi .path-desc{color:#9a9080}
+
+/* ── Framework rows ── */
+.fw{display:grid;gap:6px;margin-bottom:1.5rem}
+.fw-row{display:grid;grid-template-columns:28px 1fr;gap:10px;background:var(--ink2);border:1px solid #1a1a1a;padding:.75rem .9rem;position:relative;overflow:hidden;transition:border-color .15s}
+.fw-row:hover{border-color:var(--gbr)}
+.fw-hatch{position:absolute;inset:0;background:repeating-linear-gradient(50deg,transparent 0,transparent 13px,rgba(201,168,76,0.035) 13px,rgba(201,168,76,0.035) 14px);pointer-events:none}
+.fw-n{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--gd);opacity:.8;position:relative;z-index:1;line-height:1}
+.fw-body{position:relative;z-index:1}
+.fw-tag{font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--gd);border-bottom:1px solid var(--gd);padding-bottom:1px;display:inline-block;margin-bottom:4px}
+.fw-exp{font-size:12px;color:#c8bc9e;margin-bottom:3px;letter-spacing:.02em;font-weight:500}
+.fw-les{font-size:11px;color:#7a7260;line-height:1.6;letter-spacing:.01em}
+
+/* ── Audit checklist ── */
+.audit{background:var(--ink2);border:1px solid var(--gbr);margin-bottom:1.5rem}
+.audit-grp-hd{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:.12em;color:var(--gd);padding:8px 1.1rem 6px;background:#0c0a00;border-bottom:1px solid #1a1a1a;border-top:1px solid #1c1c1c}
+.audit-grp-hd:first-child{border-top:none}
+.a-row{display:flex;align-items:flex-start;gap:10px;padding:9px 1.1rem;border-bottom:1px solid #151515;cursor:pointer;user-select:none;position:relative;transition:background .1s}
+.a-row:hover{background:rgba(201,168,76,0.04)}
+.a-hatch{position:absolute;inset:0;background:repeating-linear-gradient(80deg,transparent 0,transparent 22px,rgba(201,168,76,0.025) 22px,rgba(201,168,76,0.025) 23px);pointer-events:none}
+.chk{width:14px;height:14px;min-width:14px;border:1px solid #3a3828;display:flex;align-items:center;justify-content:center;margin-top:2px;position:relative;z-index:1;transition:all .12s;flex-shrink:0}
+.chk.on{background:var(--g);border-color:var(--g)}
+.chk svg{display:none}
+.chk.on svg{display:block}
+.a-txt{font-size:11px;line-height:1.6;color:#9a9080;letter-spacing:.02em;position:relative;z-index:1}
+
+/* ── Score bar ── */
+.score-foot{background:#090800;border-top:1px solid var(--gbr);padding:.9rem 1.1rem}
+.sc-lbl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#5a5444;display:flex;justify-content:space-between;margin-bottom:6px}
+.sc-lbl span{color:var(--g)}
+.sc-bar{height:3px;background:#1c1c1c}
+.sc-fill{height:100%;background:linear-gradient(90deg,var(--gd),var(--gl));transition:width .4s ease}
+.sc-msg{font-size:10px;color:#6a6252;margin-top:6px;font-style:italic}
+
+/* ── Reflection questions ── */
+.qs{display:grid;gap:5px;margin-bottom:1.5rem}
+.q{background:var(--ink2);border:1px solid #1a1a1a;border-left:2px solid var(--gd);padding:.75rem .9rem;font-size:11px;line-height:1.65;color:#9a9080;letter-spacing:.02em;position:relative;overflow:hidden}
+.q-hatch{position:absolute;inset:0;background:repeating-linear-gradient(68deg,transparent 0,transparent 15px,rgba(201,168,76,0.03) 15px,rgba(201,168,76,0.03) 16px);pointer-events:none}
+.q-arr{color:var(--g);margin-right:5px;position:relative;z-index:1}
+.q span{position:relative;z-index:1}
+
+/* ── Responsive ── */
+@media(max-width:500px){
+  .hero h1{font-size:42px}
+  .paths{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr}
+  .stat{border-right:none;border-bottom:1px solid var(--gbr)}
+  .stat:last-child{border-bottom:none}
+  .body{padding:1.2rem 1.2rem 2.5rem}
+  .hero{padding:1.5rem 1.2rem 1.2rem}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <!-- Progress Bar -->
-  <div class="progress-bar" id="prog-bar">
-    <div class="progress-track">
-      <div class="progress-fill" id="prog-fill"></div>
-    </div>
-    <div class="progress-meta">
-      <span id="prog-label">Auditing your circumstances</span>
-      <span id="prog-pct">0%</span>
-    </div>
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-hatch"></div>
+    <div class="eye">The Brand Framework</div>
+    <h1>The<br><em>Brand</em><br>MOAT</h1>
+    <p class="hero-desc">The unfair advantage you already have — and the exact framework for turning it into structural protection no competitor can buy, copy, or outspend.</p>
   </div>
 
-  <!-- ════════════════════════════════════════
-       SCREEN: INTRO
-  ════════════════════════════════════════ -->
-  <div class="screen active" id="s-intro">
-    <div class="intro-wrap">
-      <span class="intro-eyebrow">Urban Unity · Brand Framework</span>
-      <h1 class="intro-h1">
-        Find Your
-        <span class="gold">Brand MOAT</span>
-      </h1>
-      <p class="intro-desc">You already have an unfair advantage your competitors cannot buy, copy, or outwork. This audit finds it — in under 5 minutes.</p>
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat"><div class="stat-hatch"></div><div class="stat-num">5</div><div class="stat-lbl">MOAT categories<br>to audit</div></div>
+    <div class="stat"><div class="stat-hatch"></div><div class="stat-num">$0</div><div class="stat-lbl">Required to build<br>a real MOAT</div></div>
+    <div class="stat"><div class="stat-hatch"></div><div class="stat-num">1</div><div class="stat-lbl">That's uniquely<br>yours — find it</div></div>
+  </div>
 
-      <div class="pillars">
-        <div class="pillar"><span class="pillar-icon">📍</span><span class="pillar-label">Geographic</span></div>
-        <div class="pillar"><span class="pillar-icon">🤝</span><span class="pillar-label">Community</span></div>
-        <div class="pillar"><span class="pillar-icon">⚙️</span><span class="pillar-label">Supply Chain</span></div>
-        <div class="pillar"><span class="pillar-icon">🎖️</span><span class="pillar-label">Background</span></div>
-        <div class="pillar"><span class="pillar-icon">🔗</span><span class="pillar-label">Access</span></div>
+  <div class="body">
+
+    <!-- Core concept -->
+    <div class="eq-block">
+      <div class="eq-hatch"></div>
+      <div class="eq-formula">A MOAT &ne; A <em>Niche.</em> It's Structural Protection.</div>
+      <div class="eq-quote">"Your circumstantial leverage is 100% proximity to your supplier. That's something I didn't have when I was in Miami." — Marshall</div>
+    </div>
+
+    <!-- Two types -->
+    <div class="sec-hd">Two types of advantage</div>
+    <div class="paths">
+      <div class="path">
+        <div class="path-hatch"></div>
+        <div class="path-title">Copyable advantages</div>
+        <div class="path-desc">Better product photos, more ad spend, trending sounds. Anyone with a credit card and enough time can replicate these. Temporary edges that get eaten.</div>
       </div>
-
-      <div class="quote-block">
-        <p>"Your circumstantial leverage is 100% proximity to your supplier. That's something I didn't have when I was in Miami."</p>
-        <cite>— Marshall Crews, Urban Unity</cite>
+      <div class="path hi">
+        <div class="path-hatch"></div>
+        <div class="path-title">Circumstantial advantages</div>
+        <div class="path-desc">Where you are, who you know, what you've lived, what you have access to. These compound over time and cannot be bought or replicated. This is the MOAT.</div>
       </div>
-
-      <button class="btn btn-gold lg" onclick="startAudit()">Start My Brand Audit →</button>
-      <p style="margin-top:14px;font-size:12px;color:var(--text-faint)">5 categories · No opt-in · ~4 minutes</p>
     </div>
-  </div>
 
-  <!-- ════════════════════════════════════════
-       SCREEN 1: GEOGRAPHIC
-  ════════════════════════════════════════ -->
-  <div class="screen" id="s-geo">
-    <div class="step-pill">Step 1 of 5</div>
-    <div class="cat-label">📍 Geographic MOAT</div>
-    <h2 class="screen-title">Where You Are<br><span class="accent">Is an Asset</span></h2>
-    <p class="screen-sub">Your location, proximity to your manufacturer, and regional identity can be structural advantages no competitor can replicate without physically relocating.</p>
-    <div id="geo-qs"></div>
-    <div class="nav-row">
-      <button class="btn btn-ghost" onclick="goBack()">← Back</button>
-      <button class="btn btn-gold" onclick="advance('s-community', 2)">Next →</button>
+    <!-- The 5 categories -->
+    <div class="sec-hd">The 5 MOAT categories</div>
+    <div class="fw">
+      <div class="fw-row">
+        <div class="fw-hatch"></div>
+        <div class="fw-n">01</div>
+        <div class="fw-body">
+          <div class="fw-tag">Geographic MOAT</div>
+          <div class="fw-exp">Where you are is a weapon</div>
+          <div class="fw-les">Near your manufacturer? In a culturally significant city? A region with a distinct scene? That's factory access, regional identity, and community content a brand in another state cannot recreate without relocating.</div>
+        </div>
+      </div>
+      <div class="fw-row">
+        <div class="fw-hatch"></div>
+        <div class="fw-n">02</div>
+        <div class="fw-body">
+          <div class="fw-tag">Community MOAT</div>
+          <div class="fw-exp">You're not targeting the culture — you are the culture</div>
+          <div class="fw-les">Already embedded in skateboarding, martial arts, a music scene, a religious community, the trades, or military? You don't market to this group. You are this group. That's a different game entirely.</div>
+        </div>
+      </div>
+      <div class="fw-row">
+        <div class="fw-hatch"></div>
+        <div class="fw-n">03</div>
+        <div class="fw-body">
+          <div class="fw-tag">Supply Chain MOAT</div>
+          <div class="fw-exp">Access and relationships others don't have</div>
+          <div class="fw-les">Family in manufacturing, a direct factory contact, rare fabric access, a supplier you've worked with for years. The Made-in-LA brand can document the factory. The brand overseas cannot fly there to compete.</div>
+        </div>
+      </div>
+      <div class="fw-row">
+        <div class="fw-hatch"></div>
+        <div class="fw-n">04</div>
+        <div class="fw-body">
+          <div class="fw-tag">Background MOAT</div>
+          <div class="fw-exp">Your story gives you authority no one can buy</div>
+          <div class="fw-les">Military background for a tactical brand. Former D1 athlete building for people who train like one. Lived experience in the aesthetic you're building. The "why I built this" story isn't marketing — it's structural credibility.</div>
+        </div>
+      </div>
+      <div class="fw-row">
+        <div class="fw-hatch"></div>
+        <div class="fw-n">05</div>
+        <div class="fw-body">
+          <div class="fw-tag">Access MOAT</div>
+          <div class="fw-exp">Relationships others have to pay for</div>
+          <div class="fw-les">Access to professional athletes, photographers, underground scenes, niche influencers, or creative collaborators. When others are writing checks for the access you have organically, that's a MOAT.</div>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <!-- ════════════════════════════════════════
-       SCREEN 2: COMMUNITY
-  ════════════════════════════════════════ -->
-  <div class="screen" id="s-community">
-    <div class="step-pill">Step 2 of 5</div>
-    <div class="cat-label">🤝 Community MOAT</div>
-    <h2 class="screen-title">You're Not Targeting<br><span class="accent">a Community</span></h2>
-    <p class="screen-sub">The sharpest brand edge is being the thing — not marketing to it. If you're already embedded in the culture your brand serves, that's a moat nobody can buy their way into.</p>
-    <div id="comm-qs"></div>
-    <div class="nav-row">
-      <button class="btn btn-ghost" onclick="goBack()">← Back</button>
-      <button class="btn btn-gold" onclick="advance('s-supply', 3)">Next →</button>
-    </div>
-  </div>
+    <!-- Self-audit -->
+    <div class="sec-hd">Self-audit — where is your MOAT?</div>
+    <div class="audit">
 
-  <!-- ════════════════════════════════════════
-       SCREEN 3: SUPPLY CHAIN
-  ════════════════════════════════════════ -->
-  <div class="screen" id="s-supply">
-    <div class="step-pill">Step 3 of 5</div>
-    <div class="cat-label">⚙️ Supply Chain MOAT</div>
-    <h2 class="screen-title">Your Factory Access<br><span class="accent">Is Your Content</span></h2>
-    <p class="screen-sub">Proximity to or a direct relationship with your manufacturer is structural content leverage. A brand sourcing from overseas literally cannot replicate what you can show up close.</p>
-    <div id="sup-qs"></div>
-    <div class="nav-row">
-      <button class="btn btn-ghost" onclick="goBack()">← Back</button>
-      <button class="btn btn-gold" onclick="advance('s-background', 4)">Next →</button>
-    </div>
-  </div>
+      <div class="audit-grp-hd">01 — Geographic</div>
+      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I operate near my manufacturer or supplier — I could document the process right now</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">My city or region has a distinct aesthetic, culture, or scene tied to my brand's identity</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I have physical access to locations, events, or communities in my market that most brands don't</div></div>
 
-  <!-- ════════════════════════════════════════
-       SCREEN 4: BACKGROUND
-  ════════════════════════════════════════ -->
-  <div class="screen" id="s-background">
-    <div class="step-pill">Step 4 of 5</div>
-    <div class="cat-label">🎖️ Background MOAT</div>
-    <h2 class="screen-title">Your Story<br><span class="accent">Is the Brand</span></h2>
-    <p class="screen-sub">A lived experience, profession, or credential gives your brand authority competitors can't manufacture. Customers don't just buy the product — they buy the person who built it.</p>
-    <div id="bg-qs"></div>
-    <div class="nav-row">
-      <button class="btn btn-ghost" onclick="goBack()">← Back</button>
-      <button class="btn btn-gold" onclick="advance('s-access', 5)">Next →</button>
-    </div>
-  </div>
+      <div class="audit-grp-hd">02 — Community</div>
+      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I'm already an active member of the subculture, sport, or scene my brand serves — not an outsider looking in</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">People in my community already know and trust me before the brand even enters the room</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I could make content from inside this community right now that a brand targeting it from outside couldn't</div></div>
 
-  <!-- ════════════════════════════════════════
-       SCREEN 5: ACCESS
-  ════════════════════════════════════════ -->
-  <div class="screen" id="s-access">
-    <div class="step-pill">Step 5 of 5</div>
-    <div class="cat-label">🔗 Access MOAT</div>
-    <h2 class="screen-title">Who You Know<br><span class="accent">Can't Be Bought</span></h2>
-    <p class="screen-sub">Relationships with photographers, athletes, artists, or underground scenes that your competitors would have to pay to access — or simply can't get at any price.</p>
-    <div id="acc-qs"></div>
-    <div class="nav-row">
-      <button class="btn btn-ghost" onclick="goBack()">← Back</button>
-      <button class="btn btn-gold" onclick="buildResults()">See My MOAT Profile →</button>
-    </div>
-  </div>
+      <div class="audit-grp-hd">03 — Supply Chain</div>
+      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I have direct relationships with manufacturers, factories, or material suppliers that took years to build</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">Something about my sourcing, materials, or process is genuinely unusual or hard to replicate</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I could make transparency content about my process right now that a competitor overseas cannot match</div></div>
 
-  <!-- ════════════════════════════════════════
-       SCREEN: RESULTS
-  ════════════════════════════════════════ -->
-  <div class="screen" id="s-results">
-    <div class="step-pill">Your Brand MOAT Profile</div>
-    <h2 class="screen-title">Your<br><span class="accent">Unfair Advantage</span></h2>
-    <p class="screen-sub">This is structural — not strategy. No competitor can replicate this by spending more money or working harder.</p>
-    <div id="results-output"></div>
-    <div style="text-align:center;margin-top:28px">
-      <button class="btn btn-ghost" onclick="restart()">← Restart Audit</button>
+      <div class="audit-grp-hd">04 — Background</div>
+      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">My personal background — career, sport, service, lived experience — directly informs what my brand is about</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I have expertise, credentials, or real-world reps in my niche that most brand founders don't</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">My "why I built this" story carries authority that another brand entering the space cannot fake</div></div>
+
+      <div class="audit-grp-hd">05 — Access</div>
+      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I have relationships with photographers, creatives, athletes, or collaborators others would have to pay for</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I have access to underground scenes, niche communities, or influential figures built through years of relationship work</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">Cosigns, collaborations, or endorsements I have access to would be difficult for a competing brand to get</div></div>
+
+      <div class="score-foot">
+        <div class="sc-lbl">MOAT score<span id="sc-txt">0 / 15</span></div>
+        <div class="sc-bar"><div class="sc-fill" id="sc-fill" style="width:0%"></div></div>
+        <div class="sc-msg" id="sc-msg">Check off what's actually true about your situation — no filtering.</div>
+      </div>
     </div>
-  </div>
+
+    <!-- Reflection questions -->
+    <div class="sec-hd">Questions to sit with right now</div>
+    <div class="qs">
+      <div class="q"><div class="q-hatch"></div><span><span class="q-arr">&#8594;</span>What do I have access to right now that another brand owner would have to fly somewhere or spend years building to get?</span></div>
+      <div class="q"><div class="q-hatch"></div><span><span class="q-arr">&#8594;</span>If someone tried to copy my brand exactly — same products, same price — what's the one thing they still couldn't replicate?</span></div>
+      <div class="q"><div class="q-hatch"></div><span><span class="q-arr">&#8594;</span>Am I making content about what I actually have, or am I competing on the same angles as everyone else?</span></div>
+      <div class="q"><div class="q-hatch"></div><span><span class="q-arr">&#8594;</span>What's true about my situation, location, or background that I've been treating as ordinary — but actually isn't?</span></div>
+      <div class="q"><div class="q-hatch"></div><span><span class="q-arr">&#8594;</span>If I had to write one sentence explaining why no competitor can replicate my edge — what would it say?</span></div>
+    </div>
+
+    <!-- Closing statement -->
+    <div class="eq-block">
+      <div class="eq-hatch"></div>
+      <div class="eq-formula">Out-<em>Angle.</em> Don't Out-Spend.</div>
+      <div class="eq-quote">You already have this. Most people just don't see it. The MOAT isn't built — it's discovered. What you just checked off is the starting point.</div>
+    </div>
+
+  </div><!-- /body -->
 
 </div><!-- /wrap -->
 
 <script>
-// ─────────────────────────────────────────────
-// DATA
-// ─────────────────────────────────────────────
-const QS = {
-  geo: [
-    {
-      id: 'geo_city',
-      q: 'Are you in a city or region with a distinct cultural identity your brand can authentically represent?',
-      opts: [
-        { t: 'Yes — my city\'s identity is core to the brand', s: 2 },
-        { t: 'Somewhat — there\'s regional character I can lean into', s: 1 },
-        { t: 'No — my location isn\'t a defining factor', s: 0 },
-      ]
-    },
-    {
-      id: 'geo_factory',
-      q: 'Are you physically close enough to your manufacturer to visit and document the process?',
-      opts: [
-        { t: 'Yes — I can walk into my factory and film it', s: 2 },
-        { t: 'Same country — some access but not deep', s: 1 },
-        { t: 'No — overseas or fully remote supply chain', s: 0 },
-      ]
-    },
-    {
-      id: 'geo_scene',
-      q: 'Is there a local scene, movement, or subculture your brand is organically connected to?',
-      opts: [
-        { t: 'Yes — I\'m embedded in a local scene my brand serves', s: 2 },
-        { t: 'Loosely connected to one', s: 1 },
-        { t: 'No strong local scene connection', s: 0 },
-      ]
-    },
-  ],
-  comm: [
-    {
-      id: 'comm_member',
-      q: 'Are you a genuine member of the community your brand targets — not just marketing to it?',
-      opts: [
-        { t: 'Yes — I am the customer. I live this lifestyle.', s: 2 },
-        { t: 'Close — I\'m adjacent to the community', s: 1 },
-        { t: 'No — I\'m approaching it from the outside', s: 0 },
-      ]
-    },
-    {
-      id: 'comm_trust',
-      q: 'Does your community already know and trust you before you try to sell them anything?',
-      opts: [
-        { t: 'Yes — I have credibility and real relationships here', s: 2 },
-        { t: 'Building it — some recognition, not established yet', s: 1 },
-        { t: 'Starting from zero', s: 0 },
-      ]
-    },
-    {
-      id: 'comm_sub',
-      q: 'Are you deeply involved in a subculture, sport, faith community, or movement with its own tight-knit network?',
-      opts: [
-        { t: 'Yes — I\'m inside one and it defines what I build', s: 2 },
-        { t: 'On the edge of one', s: 1 },
-        { t: 'No specific subculture connection', s: 0 },
-      ]
-    },
-  ],
-  sup: [
-    {
-      id: 'sup_rel',
-      q: 'Do you have a personal relationship with your manufacturer — not just a transactional one?',
-      opts: [
-        { t: 'Yes — I know them personally, I have direct access', s: 2 },
-        { t: 'We communicate directly but it\'s transactional', s: 1 },
-        { t: 'No — I go through a platform or intermediary', s: 0 },
-      ]
-    },
-    {
-      id: 'sup_content',
-      q: 'Can you document your manufacturing or sourcing process in a way competitors in other locations can\'t?',
-      opts: [
-        { t: 'Yes — factory footage, process content, behind-the-scenes', s: 2 },
-        { t: 'Limited — some process visibility but not deep', s: 1 },
-        { t: 'No — my sourcing doesn\'t lend itself to content', s: 0 },
-      ]
-    },
-    {
-      id: 'sup_rare',
-      q: 'Do you have access to materials, techniques, or sourcing relationships others in your niche don\'t have?',
-      opts: [
-        { t: 'Yes — exclusive access, rare fabrics, or unique contracts', s: 2 },
-        { t: 'Above-average supplier relationships', s: 1 },
-        { t: 'No — standard industry access', s: 0 },
-      ]
-    },
-  ],
-  bg: [
-    {
-      id: 'bg_story',
-      q: 'Do you have a personal backstory that directly connects to what your brand stands for?',
-      opts: [
-        { t: 'Yes — my origin story and my brand\'s story are the same', s: 2 },
-        { t: 'Partially — there\'s a story but it\'s not fully built out', s: 1 },
-        { t: 'No clear founding story yet', s: 0 },
-      ]
-    },
-    {
-      id: 'bg_cred',
-      q: 'Do you have a profession, skill, or domain expertise that validates your brand\'s positioning?',
-      opts: [
-        { t: 'Yes — my background directly gives the brand authority', s: 2 },
-        { t: 'Adjacent expertise — transferable credibility', s: 1 },
-        { t: 'No specific relevant expertise', s: 0 },
-      ]
-    },
-    {
-      id: 'bg_lived',
-      q: 'Have you lived through experiences that your target customer is currently going through or wants to achieve?',
-      opts: [
-        { t: 'Yes — I\'ve done what my customer wants to do', s: 2 },
-        { t: 'Shared part of the journey', s: 1 },
-        { t: 'No clear shared experience', s: 0 },
-      ]
-    },
-  ],
-  acc: [
-    {
-      id: 'acc_creative',
-      q: 'Do you have relationships with photographers, videographers, or creative talent that others pay market rate for?',
-      opts: [
-        { t: 'Yes — real relationships built through genuine connection', s: 2 },
-        { t: 'Some connections but nothing exclusive', s: 1 },
-        { t: 'No — I pay market rate for all creative', s: 0 },
-      ]
-    },
-    {
-      id: 'acc_cosign',
-      q: 'Do you have access to athletes, artists, cultural figures, or niche voices who align with your brand?',
-      opts: [
-        { t: 'Yes — real relationships with credible people in my niche', s: 2 },
-        { t: 'A few loose connections', s: 1 },
-        { t: 'No existing relationships of this type', s: 0 },
-      ]
-    },
-    {
-      id: 'acc_scene',
-      q: 'Are you plugged into underground or hard-to-access networks your target customer cares about?',
-      opts: [
-        { t: 'Yes — scenes or circles that aren\'t publicly accessible', s: 2 },
-        { t: 'On the edge of one', s: 1 },
-        { t: 'No exclusive network access', s: 0 },
-      ]
-    },
-  ],
-}
-
-const MOAT = {
-  geo: {
-    name: 'Geographic MOAT', icon: '📍', hl: 'Location-Locked Leverage',
-    desc: 'Your physical position — city, regional identity, proximity to your manufacturer — is structural brand capital that competitors cannot replicate without physically relocating.',
-    angles: [
-      { type: 'Proof / Process', text: 'Document your factory access, local manufacturing, or regional sourcing. Film the process and the people. This is content that a brand sourcing from overseas literally cannot make without flying to another country.' },
-      { type: 'Brand Story', text: '"Made in [City]" is a positioning statement, not just a label. Tell the origin story of why you\'re building from this specific place — the culture, the people, and why it matters to what you sell.' },
-      { type: 'Community', text: 'Shoot in recognizable local locations, feature local figures, partner with community events. Show that the brand is FROM here — not just sold here. Let the city be a character in your content.' },
-    ],
-    anti: () => '"No brand building from another market can walk into my factory, film my process, and tell the same story. They would have to physically relocate — and even then, the relationships wouldn\'t exist."'
-  },
-  comm: {
-    name: 'Community MOAT', icon: '🤝', hl: 'Cultural Insider Status',
-    desc: 'You are the community — not someone marketing to it. Authenticity at this level is unchallengeable. You can\'t buy a lifetime of belonging, and no competitor with an ad budget can fake real membership.',
-    angles: [
-      { type: 'Proof / Process', text: 'Show up in the spaces where your community actually exists — the gym, the game, the studio, the underground spot. Document it. This is proof of belonging that a brand with an ad budget cannot manufacture.' },
-      { type: 'Brand Story', text: 'Tell the story of how you became part of this community before the brand existed. The history matters. "I\'ve been in this scene for X years" carries authority no outsider brand can claim.' },
-      { type: 'Community', text: 'Feature members of your community as the faces of the brand. Tag them. Include them. Give them ownership of the narrative. Community-led content creates trust that paid influencer marketing can\'t replicate.' },
-    ],
-    anti: () => '"Any competitor targeting this community from the outside is marketing. I\'m documenting. No ad spend changes who was there before the brand existed — and I was."'
-  },
-  sup: {
-    name: 'Supply Chain MOAT', icon: '⚙️', hl: 'Factory-Direct Leverage',
-    desc: 'Your direct relationship with your manufacturer gives you process transparency that overseas or intermediary-sourced brands simply cannot replicate. Your supply chain is your content advantage.',
-    angles: [
-      { type: 'Proof / Process', text: 'Document the factory — the cutting, the stitching, the quality check, the faces of the people making your product. Raw transparency that builds trust, and it\'s exclusively available to brands with direct access.' },
-      { type: 'Brand Story', text: 'Tell how you built this supplier relationship. The calls, the trips, the sampling process. "Here\'s exactly how my product gets made" is the most underused content category in fashion.' },
-      { type: 'Community', text: 'Involve your audience in your process. "Here\'s what went into sourcing this fabric" creates perceived ownership and loyalty that generic brand marketing can\'t match at any spend level.' },
-    ],
-    anti: () => '"A brand sourcing through a platform or overseas factory cannot walk into my manufacturer\'s facility and film what I film. They\'d have to travel to another country — and even then, the relationship wouldn\'t exist."'
-  },
-  bg: {
-    name: 'Background MOAT', icon: '🎖️', hl: 'Authority Through Experience',
-    desc: 'Your story, expertise, or lived experience gives your brand a legitimacy that cannot be purchased. Customers don\'t just buy the product — they buy the credibility of the person who built it.',
-    angles: [
-      { type: 'Proof / Process', text: 'Create R&D content rooted in your expertise. "As a former athlete, here\'s exactly why I built the waistband this way." Design decisions informed by your background are stories no other brand can tell.' },
-      { type: 'Brand Story', text: 'Tell the full founder story — not just the "I started a brand" version. Go back further. What did you live through, achieve, or survive that makes this brand inevitable? That\'s the real hook.' },
-      { type: 'Community', text: 'Build content that speaks to people who share your background or aspire to your experience. They\'re not buying clothes — they\'re buying proof that someone like them built something worth wearing.' },
-    ],
-    anti: () => '"No competitor can manufacture my personal history. They can copy the product, match the price, and outspend me on ads — but they cannot step into my background and tell my story. That is the brand."'
-  },
-  acc: {
-    name: 'Access MOAT', icon: '🔗', hl: 'Network-Gated Content',
-    desc: 'The people and scenes you have access to are structurally exclusive. The creative collaborations and cosigns you\'ve built through real relationships are not available at any ad spend.',
-    angles: [
-      { type: 'Proof / Process', text: 'Collaborate with the people in your network and document it organically. Behind-the-scenes with athletes, artists, or underground figures is credibility content — and the access itself is the story.' },
-      { type: 'Brand Story', text: 'Tell the story of how these relationships formed. Real connections built over time are more compelling than paid partnerships — and your audience can feel the difference.' },
-      { type: 'Community', text: 'Use your access to create cosign content and cross-audience reach. When respected figures wear or endorse your brand organically, it reaches communities that no paid ad can penetrate.' },
-    ],
-    anti: () => '"A brand without these relationships cannot replicate what I have access to. They would have to pay for what I\'ve built organically over time — and even then, they can\'t buy real cosigns."'
-  },
-}
-
-// ─────────────────────────────────────────────
-// STATE
-// ─────────────────────────────────────────────
-const answers = {}
-const history = ['s-intro']
-
-const STEP_SCREENS = ['s-intro', 's-geo', 's-community', 's-supply', 's-background', 's-access', 's-results']
-const STEP_LABELS  = ['', 'Geographic', 'Community', 'Supply Chain', 'Background', 'Access', '']
-
-// ─────────────────────────────────────────────
-// BUILD QUESTION CARDS
-// ─────────────────────────────────────────────
-function buildQs(containerId, cat) {
-  const el = document.getElementById(containerId)
-  el.innerHTML = ''
-  QS[cat].forEach(q => {
-    const card = document.createElement('div')
-    card.className = 'q-card'
-    card.id = 'qc-' + q.id
-    card.innerHTML = `
-      <div class="q-card-head" onclick="toggleQ('${q.id}')">
-        <span class="q-card-text">"${q.q}"</span>
-        <div class="q-icon" id="qi-${q.id}">+</div>
-      </div>
-      <div class="q-card-body">
-        <div class="opts">
-          ${q.opts.map((o, i) => `
-            <div class="opt" id="opt-${q.id}-${i}" onclick="pick('${q.id}',${o.s},${i},${q.opts.length})">
-              <div class="opt-radio"></div>
-              <span>${o.t}</span>
-            </div>
-          `).join('')}
-        </div>
-      </div>`
-    el.appendChild(card)
-    // Re-apply selection if user went back
-    if (answers[q.id] !== undefined) {
-      q.opts.forEach((o, i) => {
-        if (o.s === answers[q.id]) {
-          document.getElementById(`opt-${q.id}-${i}`)?.classList.add('selected')
-        }
-      })
-    }
-  })
-}
-
-function toggleQ(id) {
-  const card = document.getElementById('qc-' + id)
-  const wasOpen = card.classList.contains('open')
-  card.parentElement.querySelectorAll('.q-card').forEach(c => c.classList.remove('open'))
-  if (!wasOpen) card.classList.add('open')
-}
-
-function pick(qId, score, idx, total) {
-  for (let i = 0; i < total; i++) document.getElementById(`opt-${qId}-${i}`)?.classList.remove('selected')
-  document.getElementById(`opt-${qId}-${idx}`)?.classList.add('selected')
-  answers[qId] = score
-  setTimeout(() => { document.getElementById('qc-' + qId)?.classList.remove('open') }, 280)
-}
-
-// ─────────────────────────────────────────────
-// NAVIGATION
-// ─────────────────────────────────────────────
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'))
-  document.getElementById(id)?.classList.add('active')
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
-
-function startAudit() {
-  buildQs('geo-qs', 'geo')
-  buildQs('comm-qs', 'comm')
-  buildQs('sup-qs', 'sup')
-  buildQs('bg-qs', 'bg')
-  buildQs('acc-qs', 'acc')
-  document.getElementById('prog-bar').style.display = 'block'
-  history.length = 1
-  advance('s-geo', 1)
-}
-
-function advance(screenId, step) {
-  history.push(screenId)
-  const pct = Math.round((step / 5) * 100)
-  document.getElementById('prog-fill').style.width = pct + '%'
-  document.getElementById('prog-pct').textContent = pct + '%'
-  document.getElementById('prog-label').textContent = STEP_LABELS[step] ? 'Auditing: ' + STEP_LABELS[step] : 'Reviewing...'
-  showScreen(screenId)
-}
-
-function goBack() {
-  if (history.length > 1) {
-    history.pop()
-    const prev = history[history.length - 1]
-    if (prev === 's-intro') document.getElementById('prog-bar').style.display = 'none'
-    const step = STEP_SCREENS.indexOf(prev)
-    if (step > 0 && step < 6) {
-      document.getElementById('prog-fill').style.width = Math.round(((step - 1) / 5) * 100) + '%'
-      document.getElementById('prog-pct').textContent = Math.round(((step - 1) / 5) * 100) + '%'
-      document.getElementById('prog-label').textContent = STEP_LABELS[step] ? 'Auditing: ' + STEP_LABELS[step] : ''
-    }
-    showScreen(prev)
-  }
-}
-
-function restart() {
-  Object.keys(answers).forEach(k => delete answers[k])
-  document.getElementById('prog-bar').style.display = 'none'
-  history.length = 1
-  showScreen('s-intro')
-}
-
-// ─────────────────────────────────────────────
-// SCORING
-// ─────────────────────────────────────────────
-function score() {
-  const cats = { geo: 0, comm: 0, sup: 0, bg: 0, acc: 0 }
-  Object.entries(answers).forEach(([k, v]) => {
-    const cat = k.split('_')[0]
-    if (cat in cats) cats[cat] += v
-  })
-  return Object.entries(cats)
-    .map(([cat, s]) => ({ cat, score: s, max: 6, pct: Math.round((s / 6) * 100) }))
-    .sort((a, b) => b.score - a.score)
-}
-
-// ─────────────────────────────────────────────
-// RESULTS
-// ─────────────────────────────────────────────
-function buildResults() {
-  document.getElementById('prog-bar').style.display = 'none'
-  const scores = score()
-  const primary = scores[0]
-  const m = MOAT[primary.cat]
-  const secondary = scores.filter((s, i) => i > 0 && s.pct >= 34)
-
-  let html = ''
-
-  // Primary MOAT card
-  html += `
-    <div class="moat-card">
-      <div class="result-tag">${m.icon} Primary MOAT — ${m.name}</div>
-      <div class="moat-badge">${m.icon} ${m.hl}</div>
-      <div class="moat-headline">${m.hl}</div>
-      <div class="moat-desc">${m.desc}</div>
-    </div>`
-
-  // Secondary MOATs
-  if (secondary.length) {
-    html += `<div class="section-label" style="margin-top:24px">Secondary MOATs</div>`
-    secondary.forEach(s => {
-      const sm = MOAT[s.cat]
-      html += `
-        <div class="secondary-row">
-          <span class="secondary-icon">${sm.icon}</span>
-          <div class="secondary-info">
-            <div class="secondary-name">${sm.name}</div>
-            <div class="secondary-hl">${sm.hl}</div>
-          </div>
-          <div class="secondary-pct">${s.pct}%</div>
-        </div>`
-    })
-  }
-
-  html += '<div class="divider"></div>'
-
-  // Content angles
-  html += `<div class="section-label">Your Content Angles</div>`
-  m.angles.forEach(a => {
-    html += `
-      <div class="angle-card">
-        <div class="angle-type">${a.type}</div>
-        <div class="angle-text">${a.text}</div>
-      </div>`
-  })
-
-  html += '<div class="divider"></div>'
-
-  // Anti-copy statement
-  html += `
-    <div class="section-label">Your Anti-Copy Statement</div>
-    <div class="anti-copy">
-      <div class="anti-copy-label">Why No Competitor Can Replicate This</div>
-      <div class="anti-copy-text">${m.anti()}</div>
-    </div>`
-
-  html += '<div class="divider"></div>'
-
-  // Score breakdown
-  html += `<div class="section-label">Full MOAT Breakdown</div>`
-  scores.forEach(s => {
-    const sm = MOAT[s.cat]
-    const isStrong = s.pct >= 50
-    html += `
-      <div class="bar-row">
-        <div class="bar-label-row">
-          <span class="bar-name">${sm.icon} ${sm.name}</span>
-          <span class="bar-pct" style="color:${isStrong ? 'var(--gold)' : 'var(--text-faint)'}">${s.pct}%</span>
-        </div>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:${s.pct}%;background:${isStrong ? 'var(--gold)' : 'rgba(240,235,225,0.18)'}"></div>
-        </div>
-      </div>`
-  })
-
-  // CTA
-  html += `
-    <div class="cta-box">
-      <h3>Ready to Weaponize Your MOAT?</h3>
-      <p>Marshall works directly with clothing brand founders to turn circumstantial leverage into systematic content, revenue, and brand growth. Your specific situation — mapped to a clear path forward.</p>
-      <button class="btn btn-gold lg" onclick="window.open('https://www.ascendcontent.io/','_blank')">Work With Marshall →</button>
-    </div>`
-
-  document.getElementById('results-output').innerHTML = html
-  history.push('s-results')
-  showScreen('s-results')
+function tick(row){
+  var c=row.querySelector('.chk');
+  c.classList.toggle('on');
+  var total=document.querySelectorAll('.chk').length;
+  var n=document.querySelectorAll('.chk.on').length;
+  document.getElementById('sc-txt').textContent=n+' / '+total;
+  document.getElementById('sc-fill').style.width=Math.round(n/total*100)+'%';
+  var m=document.getElementById('sc-msg');
+  if(n===0)m.textContent="Check off what's actually true about your situation — no filtering.";
+  else if(n<=3)m.textContent="One or two MOATs showing. Go deeper — you probably have more than you think.";
+  else if(n<=7)m.textContent="Solid structural foundation. Now the question is: are you using it?";
+  else if(n<=11)m.textContent="Multiple MOATs stacking. This is compounding leverage — document all of it.";
+  else m.textContent="You're sitting on serious unfair advantages. Build everything around them.";
 }
 </script>
 </body>
