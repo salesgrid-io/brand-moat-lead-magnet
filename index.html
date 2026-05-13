@@ -5,105 +5,106 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Brand MOAT — Circumstantial Leverage</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --g:#C9A84C;--gl:#E8CB7A;--gd:#9A7228;
-  --gbr:rgba(201,168,76,0.28);
-  --ink:#0a0a0a;--ink2:#111;--ink3:#181818
+  --ink:#100F0D;
+  --w:#F2EDE4;     /* warm white */
+  --wp:#FFFFFF;
+  --g:#B8922A;     /* amber gold — warmer, less yellow */
+  --gl:#D4AE55;
+  --gd:#7A5E18;
+  --gbr:rgba(184,146,42,0.25);
+  --wbr:rgba(242,237,228,0.12);
 }
-body{font-family:'IBM Plex Mono',monospace;color:#d4c9ad;background:var(--ink);min-height:100vh;display:flex;justify-content:center;padding:2rem 1rem}
+body{font-family:'DM Mono',monospace;color:var(--w);background:var(--ink);min-height:100vh;display:flex;justify-content:center;padding:2rem 1rem}
 .wrap{width:100%;max-width:680px}
 
-/* ── Hero ── */
-.hero{background:var(--ink);padding:2.2rem 2rem 1.8rem;border-bottom:1px solid var(--gbr);position:relative;overflow:hidden}
-.hero-hatch{position:absolute;inset:0;background:repeating-linear-gradient(62deg,transparent 0,transparent 18px,rgba(201,168,76,0.03) 18px,rgba(201,168,76,0.03) 19px),repeating-linear-gradient(-62deg,transparent 0,transparent 26px,rgba(201,168,76,0.025) 26px,rgba(201,168,76,0.025) 27px);pointer-events:none}
-.eye{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--g);margin-bottom:.4rem}
-.hero h1{font-family:'Bebas Neue',sans-serif;font-size:60px;line-height:.9;color:#f0e6cc;letter-spacing:.03em;position:relative;z-index:1;margin-bottom:.7rem}
-.hero h1 em{color:var(--g);font-style:normal;text-decoration:underline;text-decoration-color:var(--gd);text-underline-offset:4px}
-.hero-desc{font-size:11px;line-height:1.75;color:#a89e84;max-width:430px;position:relative;z-index:1;letter-spacing:.02em}
+/* ── Hero — dark ── */
+.hero{padding:2.6rem 2rem 2rem;border-bottom:2px solid var(--w);position:relative;overflow:hidden;background:var(--ink)}
+.hero::after{content:'';position:absolute;right:-60px;top:-40px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(184,146,42,0.08) 0%,transparent 70%);pointer-events:none}
+.eye{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--g);margin-bottom:.5rem;font-weight:500}
+.hero h1{font-family:'Syne',sans-serif;font-size:64px;line-height:.88;color:var(--wp);font-weight:800;letter-spacing:-.02em;position:relative;z-index:1;margin-bottom:.8rem}
+.hero h1 em{color:var(--g);font-style:normal;display:block}
+.hero-desc{font-size:11.5px;line-height:1.8;color:rgba(242,237,228,0.55);max-width:400px;position:relative;z-index:1;letter-spacing:.01em}
 
-/* ── Stats ── */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--gbr)}
-.stat{background:var(--ink2);padding:.9rem 1rem;text-align:center;border-right:1px solid var(--gbr);position:relative;overflow:hidden}
+/* ── Stats — white on dark ── */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--wbr)}
+.stat{background:var(--ink);padding:1rem 1rem;text-align:center;border-right:1px solid var(--wbr);position:relative}
 .stat:last-child{border-right:none}
-.stat-hatch{position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent 0,transparent 5px,rgba(201,168,76,0.05) 5px,rgba(201,168,76,0.05) 6px);pointer-events:none}
-.stat-num{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--g);line-height:1;position:relative;z-index:1}
-.stat-lbl{font-size:9px;color:#7a7260;margin-top:3px;line-height:1.5;letter-spacing:.04em;position:relative;z-index:1}
+.stat-num{font-family:'Syne',sans-serif;font-size:30px;color:var(--wp);line-height:1;font-weight:800;position:relative;z-index:1}
+.stat-num span{color:var(--g)}
+.stat-lbl{font-size:9px;color:rgba(242,237,228,0.38);margin-top:4px;line-height:1.5;letter-spacing:.05em}
 
 /* ── Body ── */
-.body{padding:1.5rem 2rem 2.5rem}
-
-/* ── Eq block ── */
-.eq-block{border-left:3px solid var(--g);padding:.9rem 1.1rem;margin-bottom:1.5rem;background:var(--ink2);position:relative;overflow:hidden}
-.eq-hatch{position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent 0,transparent 9px,rgba(201,168,76,0.04) 9px,rgba(201,168,76,0.04) 10px);pointer-events:none}
-.eq-formula{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#f0e6cc;letter-spacing:.07em;position:relative;z-index:1}
-.eq-formula em{color:var(--g);font-style:normal}
-.eq-quote{font-size:11px;line-height:1.7;color:#9a9080;font-style:italic;margin-top:.5rem;position:relative;z-index:1}
+.body{padding:1.6rem 2rem 2.5rem}
 
 /* ── Section header ── */
-.sec-hd{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--g);padding-bottom:7px;border-bottom:1px solid var(--gbr);margin-bottom:1rem;display:flex;align-items:center;gap:6px}
-.sec-hd::before{content:'//';color:#3a3628}
+.sec-hd{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:rgba(242,237,228,0.35);padding-bottom:7px;border-bottom:1px solid var(--wbr);margin-bottom:1rem;display:flex;align-items:center;gap:6px}
+.sec-hd::before{content:'—';color:var(--g)}
 
-/* ── Two-column paths ── */
-.paths{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.5rem}
-.path{padding:1rem 1.1rem;border:1px solid #1d1d1d;background:var(--ink2);position:relative;overflow:hidden}
-.path-hatch{position:absolute;inset:0;background:repeating-linear-gradient(72deg,transparent 0,transparent 11px,rgba(201,168,76,0.03) 11px,rgba(201,168,76,0.03) 12px);pointer-events:none}
-.path.hi{border-color:var(--gbr);background:#0c0a00}
-.path-title{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.07em;color:#4a4638;margin-bottom:4px;position:relative;z-index:1}
-.path.hi .path-title{color:var(--g)}
-.path-desc{font-size:11px;color:#5a5444;line-height:1.6;position:relative;z-index:1}
-.path.hi .path-desc{color:#9a9080}
+/* ── Eq block — dark with white text ── */
+.eq-block{border-left:3px solid var(--g);padding:.9rem 1.2rem;margin-bottom:1.6rem;background:rgba(242,237,228,0.04);position:relative}
+.eq-formula{font-family:'Syne',sans-serif;font-size:20px;color:var(--wp);font-weight:700;position:relative;z-index:1;line-height:1.2}
+.eq-formula em{color:var(--g);font-style:normal}
+.eq-quote{font-size:11px;line-height:1.75;color:rgba(242,237,228,0.5);font-style:italic;margin-top:.6rem;position:relative;z-index:1}
 
-/* ── Framework rows ── */
-.fw{display:grid;gap:6px;margin-bottom:1.5rem}
-.fw-row{display:grid;grid-template-columns:28px 1fr;gap:10px;background:var(--ink2);border:1px solid #1a1a1a;padding:.75rem .9rem;position:relative;overflow:hidden;transition:border-color .15s}
-.fw-row:hover{border-color:var(--gbr)}
-.fw-hatch{position:absolute;inset:0;background:repeating-linear-gradient(50deg,transparent 0,transparent 13px,rgba(201,168,76,0.035) 13px,rgba(201,168,76,0.035) 14px);pointer-events:none}
-.fw-n{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--gd);opacity:.8;position:relative;z-index:1;line-height:1}
-.fw-body{position:relative;z-index:1}
-.fw-tag{font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--gd);border-bottom:1px solid var(--gd);padding-bottom:1px;display:inline-block;margin-bottom:4px}
-.fw-exp{font-size:12px;color:#c8bc9e;margin-bottom:3px;letter-spacing:.02em;font-weight:500}
-.fw-les{font-size:11px;color:#7a7260;line-height:1.6;letter-spacing:.01em}
+/* ── Two paths — WHITE cards ── */
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.6rem}
+.path{padding:1.1rem 1.2rem;border:1px solid var(--wbr);background:var(--ink);position:relative}
+.path.hi{background:var(--w);border-color:var(--w)}
+.path-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:.04em;color:rgba(242,237,228,0.3);margin-bottom:5px;text-transform:uppercase}
+.path.hi .path-title{color:var(--ink)}
+.path-desc{font-size:11px;color:rgba(242,237,228,0.4);line-height:1.65}
+.path.hi .path-desc{color:rgba(16,15,13,0.65)}
 
-/* ── Audit checklist ── */
-.audit{background:var(--ink2);border:1px solid var(--gbr);margin-bottom:1.5rem}
-.audit-grp-hd{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:.12em;color:var(--gd);padding:8px 1.1rem 6px;background:#0c0a00;border-bottom:1px solid #1a1a1a;border-top:1px solid #1c1c1c}
+/* ── Framework rows — WHITE cards ── */
+.fw{display:grid;gap:6px;margin-bottom:1.6rem}
+.fw-row{display:grid;grid-template-columns:36px 1fr;gap:12px;background:var(--w);border:1px solid transparent;padding:.85rem 1rem;transition:border-color .15s,box-shadow .15s}
+.fw-row:hover{border-color:var(--g);box-shadow:0 0 0 1px var(--gbr)}
+.fw-n{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--g);line-height:1}
+.fw-body{}
+.fw-tag{font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--gd);border-bottom:1px solid rgba(122,94,24,0.4);padding-bottom:1px;display:inline-block;margin-bottom:5px;font-weight:500}
+.fw-exp{font-size:12.5px;color:var(--ink);margin-bottom:3px;font-weight:600;font-family:'Syne',sans-serif;letter-spacing:-.01em}
+.fw-les{font-size:11px;color:rgba(16,15,13,0.58);line-height:1.65}
+
+/* ── Audit — WHITE rows ── */
+.audit{background:var(--ink);border:1px solid var(--wbr);margin-bottom:1.6rem;overflow:hidden}
+.audit-grp-hd{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g);padding:8px 1.1rem 7px;background:rgba(184,146,42,0.06);border-bottom:1px solid var(--wbr);border-top:1px solid var(--wbr)}
 .audit-grp-hd:first-child{border-top:none}
-.a-row{display:flex;align-items:flex-start;gap:10px;padding:9px 1.1rem;border-bottom:1px solid #151515;cursor:pointer;user-select:none;position:relative;transition:background .1s}
-.a-row:hover{background:rgba(201,168,76,0.04)}
-.a-hatch{position:absolute;inset:0;background:repeating-linear-gradient(80deg,transparent 0,transparent 22px,rgba(201,168,76,0.025) 22px,rgba(201,168,76,0.025) 23px);pointer-events:none}
-.chk{width:14px;height:14px;min-width:14px;border:1px solid #3a3828;display:flex;align-items:center;justify-content:center;margin-top:2px;position:relative;z-index:1;transition:all .12s;flex-shrink:0}
+.a-row{display:flex;align-items:flex-start;gap:11px;padding:10px 1.1rem;border-bottom:1px solid rgba(242,237,228,0.05);cursor:pointer;user-select:none;position:relative;transition:background .1s;background:var(--w)}
+.a-row:last-of-type{border-bottom:none}
+.a-row:hover{background:#e8e2d6}
+.chk{width:15px;height:15px;min-width:15px;border:1.5px solid rgba(16,15,13,0.2);display:flex;align-items:center;justify-content:center;margin-top:2px;position:relative;z-index:1;transition:all .12s;flex-shrink:0;background:var(--wp)}
 .chk.on{background:var(--g);border-color:var(--g)}
 .chk svg{display:none}
 .chk.on svg{display:block}
-.a-txt{font-size:11px;line-height:1.6;color:#9a9080;letter-spacing:.02em;position:relative;z-index:1}
+.a-txt{font-size:11px;line-height:1.6;color:rgba(16,15,13,0.65);letter-spacing:.01em;position:relative;z-index:1}
+.a-row:hover .a-txt{color:rgba(16,15,13,0.85)}
 
-/* ── Score bar ── */
-.score-foot{background:#090800;border-top:1px solid var(--gbr);padding:.9rem 1.1rem}
-.sc-lbl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#5a5444;display:flex;justify-content:space-between;margin-bottom:6px}
-.sc-lbl span{color:var(--g)}
-.sc-bar{height:3px;background:#1c1c1c}
+/* ── Score foot — dark ── */
+.score-foot{background:var(--ink);border-top:1px solid var(--wbr);padding:.9rem 1.1rem}
+.sc-lbl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(242,237,228,0.3);display:flex;justify-content:space-between;margin-bottom:7px}
+.sc-lbl span{color:var(--gl)}
+.sc-bar{height:2px;background:rgba(242,237,228,0.08)}
 .sc-fill{height:100%;background:linear-gradient(90deg,var(--gd),var(--gl));transition:width .4s ease}
-.sc-msg{font-size:10px;color:#6a6252;margin-top:6px;font-style:italic}
+.sc-msg{font-size:10px;color:rgba(242,237,228,0.3);margin-top:6px;font-style:italic}
 
-/* ── Reflection questions ── */
-.qs{display:grid;gap:5px;margin-bottom:1.5rem}
-.q{background:var(--ink2);border:1px solid #1a1a1a;border-left:2px solid var(--gd);padding:.75rem .9rem;font-size:11px;line-height:1.65;color:#9a9080;letter-spacing:.02em;position:relative;overflow:hidden}
-.q-hatch{position:absolute;inset:0;background:repeating-linear-gradient(68deg,transparent 0,transparent 15px,rgba(201,168,76,0.03) 15px,rgba(201,168,76,0.03) 16px);pointer-events:none}
-.q-arr{color:var(--g);margin-right:5px;position:relative;z-index:1}
-.q span{position:relative;z-index:1}
+/* ── Reflection Qs — WHITE cards ── */
+.qs{display:grid;gap:5px;margin-bottom:1.6rem}
+.q{background:var(--w);border-left:3px solid var(--g);padding:.8rem 1rem;font-size:11px;line-height:1.7;color:rgba(16,15,13,0.65);letter-spacing:.01em}
+.q-arr{color:var(--g);margin-right:5px}
 
 /* ── Responsive ── */
 @media(max-width:500px){
-  .hero h1{font-size:42px}
+  .hero h1{font-size:46px}
   .paths{grid-template-columns:1fr}
   .stats{grid-template-columns:1fr}
-  .stat{border-right:none;border-bottom:1px solid var(--gbr)}
+  .stat{border-right:none;border-bottom:1px solid var(--wbr)}
   .stat:last-child{border-bottom:none}
   .body{padding:1.2rem 1.2rem 2.5rem}
-  .hero{padding:1.5rem 1.2rem 1.2rem}
+  .hero{padding:1.8rem 1.2rem 1.5rem}
 }
 </style>
 </head>
@@ -112,25 +113,23 @@ body{font-family:'IBM Plex Mono',monospace;color:#d4c9ad;background:var(--ink);m
 
   <!-- Hero -->
   <div class="hero">
-    <div class="hero-hatch"></div>
     <div class="eye">The Brand Framework</div>
-    <h1>The<br><em>Brand</em><br>MOAT</h1>
+    <h1>The<br><em>Brand MOAT</em></h1>
     <p class="hero-desc">The unfair advantage you already have — and the exact framework for turning it into structural protection no competitor can buy, copy, or outspend.</p>
   </div>
 
   <!-- Stats -->
   <div class="stats">
-    <div class="stat"><div class="stat-hatch"></div><div class="stat-num">5</div><div class="stat-lbl">MOAT categories<br>to audit</div></div>
-    <div class="stat"><div class="stat-hatch"></div><div class="stat-num">$0</div><div class="stat-lbl">Required to build<br>a real MOAT</div></div>
-    <div class="stat"><div class="stat-hatch"></div><div class="stat-num">1</div><div class="stat-lbl">That's uniquely<br>yours — find it</div></div>
+    <div class="stat"><div class="stat-num"><span>5</span></div><div class="stat-lbl">MOAT categories<br>to audit</div></div>
+    <div class="stat"><div class="stat-num">$<span>0</span></div><div class="stat-lbl">Required to build<br>a real MOAT</div></div>
+    <div class="stat"><div class="stat-num"><span>1</span></div><div class="stat-lbl">That's uniquely<br>yours — find it</div></div>
   </div>
 
   <div class="body">
 
     <!-- Core concept -->
     <div class="eq-block">
-      <div class="eq-hatch"></div>
-      <div class="eq-formula">A MOAT &ne; A <em>Niche.</em> It's Structural Protection.</div>
+      <div class="eq-formula">A MOAT &ne; A <em>Niche.</em><br>It's Structural Protection.</div>
       <div class="eq-quote">"Your circumstantial leverage is 100% proximity to your supplier. That's something I didn't have when I was in Miami." — Marshall</div>
     </div>
 
@@ -138,13 +137,11 @@ body{font-family:'IBM Plex Mono',monospace;color:#d4c9ad;background:var(--ink);m
     <div class="sec-hd">Two types of advantage</div>
     <div class="paths">
       <div class="path">
-        <div class="path-hatch"></div>
-        <div class="path-title">Copyable advantages</div>
+        <div class="path-title">Copyable</div>
         <div class="path-desc">Better product photos, more ad spend, trending sounds. Anyone with a credit card and enough time can replicate these. Temporary edges that get eaten.</div>
       </div>
       <div class="path hi">
-        <div class="path-hatch"></div>
-        <div class="path-title">Circumstantial advantages</div>
+        <div class="path-title">Circumstantial</div>
         <div class="path-desc">Where you are, who you know, what you've lived, what you have access to. These compound over time and cannot be bought or replicated. This is the MOAT.</div>
       </div>
     </div>
@@ -153,7 +150,6 @@ body{font-family:'IBM Plex Mono',monospace;color:#d4c9ad;background:var(--ink);m
     <div class="sec-hd">The 5 MOAT categories</div>
     <div class="fw">
       <div class="fw-row">
-        <div class="fw-hatch"></div>
         <div class="fw-n">01</div>
         <div class="fw-body">
           <div class="fw-tag">Geographic MOAT</div>
@@ -162,7 +158,6 @@ body{font-family:'IBM Plex Mono',monospace;color:#d4c9ad;background:var(--ink);m
         </div>
       </div>
       <div class="fw-row">
-        <div class="fw-hatch"></div>
         <div class="fw-n">02</div>
         <div class="fw-body">
           <div class="fw-tag">Community MOAT</div>
@@ -171,7 +166,6 @@ body{font-family:'IBM Plex Mono',monospace;color:#d4c9ad;background:var(--ink);m
         </div>
       </div>
       <div class="fw-row">
-        <div class="fw-hatch"></div>
         <div class="fw-n">03</div>
         <div class="fw-body">
           <div class="fw-tag">Supply Chain MOAT</div>
@@ -180,7 +174,6 @@ body{font-family:'IBM Plex Mono',monospace;color:#d4c9ad;background:var(--ink);m
         </div>
       </div>
       <div class="fw-row">
-        <div class="fw-hatch"></div>
         <div class="fw-n">04</div>
         <div class="fw-body">
           <div class="fw-tag">Background MOAT</div>
@@ -189,12 +182,11 @@ body{font-family:'IBM Plex Mono',monospace;color:#d4c9ad;background:var(--ink);m
         </div>
       </div>
       <div class="fw-row">
-        <div class="fw-hatch"></div>
         <div class="fw-n">05</div>
         <div class="fw-body">
           <div class="fw-tag">Access MOAT</div>
           <div class="fw-exp">Relationships others have to pay for</div>
-          <div class="fw-les">Access to professional athletes, photographers, underground scenes, niche influencers, or creative collaborators. When others are writing checks for the access you have organically, that's a MOAT.</div>
+          <div class="fw-les">Access to professional athletes, photographers, underground scenes, niche influencers, or creative collaborators. When others are writing checks for what you have organically, that's a MOAT.</div>
         </div>
       </div>
     </div>
@@ -204,29 +196,29 @@ body{font-family:'IBM Plex Mono',monospace;color:#d4c9ad;background:var(--ink);m
     <div class="audit">
 
       <div class="audit-grp-hd">01 — Geographic</div>
-      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I operate near my manufacturer or supplier — I could document the process right now</div></div>
-      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">My city or region has a distinct aesthetic, culture, or scene tied to my brand's identity</div></div>
-      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I have physical access to locations, events, or communities in my market that most brands don't</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I operate near my manufacturer or supplier — I could document the process right now</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">My city or region has a distinct aesthetic, culture, or scene tied to my brand's identity</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I have physical access to locations, events, or communities in my market that most brands don't</div></div>
 
       <div class="audit-grp-hd">02 — Community</div>
-      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I'm already an active member of the subculture, sport, or scene my brand serves — not an outsider looking in</div></div>
-      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">People in my community already know and trust me before the brand even enters the room</div></div>
-      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I could make content from inside this community right now that a brand targeting it from outside couldn't</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I'm already an active member of the subculture, sport, or scene my brand serves — not an outsider looking in</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">People in my community already know and trust me before the brand even enters the room</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I could make content from inside this community right now that a brand targeting it from outside couldn't</div></div>
 
       <div class="audit-grp-hd">03 — Supply Chain</div>
-      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I have direct relationships with manufacturers, factories, or material suppliers that took years to build</div></div>
-      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">Something about my sourcing, materials, or process is genuinely unusual or hard to replicate</div></div>
-      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I could make transparency content about my process right now that a competitor overseas cannot match</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I have direct relationships with manufacturers, factories, or material suppliers that took years to build</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">Something about my sourcing, materials, or process is genuinely unusual or hard to replicate</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I could make transparency content about my process right now that a competitor overseas cannot match</div></div>
 
       <div class="audit-grp-hd">04 — Background</div>
-      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">My personal background — career, sport, service, lived experience — directly informs what my brand is about</div></div>
-      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I have expertise, credentials, or real-world reps in my niche that most brand founders don't</div></div>
-      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">My "why I built this" story carries authority that another brand entering the space cannot fake</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">My personal background — career, sport, service, lived experience — directly informs what my brand is about</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I have expertise, credentials, or real-world reps in my niche that most brand founders don't</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">My "why I built this" story carries authority that another brand entering the space cannot fake</div></div>
 
       <div class="audit-grp-hd">05 — Access</div>
-      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I have relationships with photographers, creatives, athletes, or collaborators others would have to pay for</div></div>
-      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I have access to underground scenes, niche communities, or influential figures built through years of relationship work</div></div>
-      <div class="a-row" onclick="tick(this)"><div class="a-hatch"></div><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">Cosigns, collaborations, or endorsements I have access to would be difficult for a competing brand to get</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I have relationships with photographers, creatives, athletes, or collaborators others would have to pay for</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">I have access to underground scenes, niche communities, or influential figures built through years of relationship work</div></div>
+      <div class="a-row" onclick="tick(this)"><div class="chk"><svg width="9" height="7" viewBox="0 0 9 7"><path d="M1 3.5L3.2 5.5L8 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div class="a-txt">Cosigns, collaborations, or endorsements I have access to would be difficult for a competing brand to get</div></div>
 
       <div class="score-foot">
         <div class="sc-lbl">MOAT score<span id="sc-txt">0 / 15</span></div>
@@ -238,23 +230,21 @@ body{font-family:'IBM Plex Mono',monospace;color:#d4c9ad;background:var(--ink);m
     <!-- Reflection questions -->
     <div class="sec-hd">Questions to sit with right now</div>
     <div class="qs">
-      <div class="q"><div class="q-hatch"></div><span><span class="q-arr">&#8594;</span>What do I have access to right now that another brand owner would have to fly somewhere or spend years building to get?</span></div>
-      <div class="q"><div class="q-hatch"></div><span><span class="q-arr">&#8594;</span>If someone tried to copy my brand exactly — same products, same price — what's the one thing they still couldn't replicate?</span></div>
-      <div class="q"><div class="q-hatch"></div><span><span class="q-arr">&#8594;</span>Am I making content about what I actually have, or am I competing on the same angles as everyone else?</span></div>
-      <div class="q"><div class="q-hatch"></div><span><span class="q-arr">&#8594;</span>What's true about my situation, location, or background that I've been treating as ordinary — but actually isn't?</span></div>
-      <div class="q"><div class="q-hatch"></div><span><span class="q-arr">&#8594;</span>If I had to write one sentence explaining why no competitor can replicate my edge — what would it say?</span></div>
+      <div class="q"><span class="q-arr">&#8594;</span>What do I have access to right now that another brand owner would have to fly somewhere or spend years building to get?</div>
+      <div class="q"><span class="q-arr">&#8594;</span>If someone tried to copy my brand exactly — same products, same price — what's the one thing they still couldn't replicate?</div>
+      <div class="q"><span class="q-arr">&#8594;</span>Am I making content about what I actually have, or am I competing on the same angles as everyone else?</div>
+      <div class="q"><span class="q-arr">&#8594;</span>What's true about my situation, location, or background that I've been treating as ordinary — but actually isn't?</div>
+      <div class="q"><span class="q-arr">&#8594;</span>If I had to write one sentence explaining why no competitor can replicate my edge — what would it say?</div>
     </div>
 
-    <!-- Closing statement -->
+    <!-- Closing -->
     <div class="eq-block">
-      <div class="eq-hatch"></div>
       <div class="eq-formula">Out-<em>Angle.</em> Don't Out-Spend.</div>
       <div class="eq-quote">You already have this. Most people just don't see it. The MOAT isn't built — it's discovered. What you just checked off is the starting point.</div>
     </div>
 
-  </div><!-- /body -->
-
-</div><!-- /wrap -->
+  </div>
+</div>
 
 <script>
 function tick(row){
