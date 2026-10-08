@@ -106,6 +106,14 @@ body{font-family:'DM Mono',monospace;color:var(--w);background:var(--ink);min-he
   .body{padding:1.2rem 1.2rem 2.5rem}
   .hero{padding:1.8rem 1.2rem 1.5rem}
 }
+/* Ending CTA (same block as The Speedrun Method) */
+.cta-block{background:#090800;border-top:1px solid var(--gbr);padding:1.75rem 2rem;text-align:center;position:relative;overflow:hidden}
+.cta-hatch{position:absolute;inset:0;background:repeating-linear-gradient(55deg,transparent 0,transparent 14px,rgba(201,168,76,0.04) 14px,rgba(201,168,76,0.04) 15px),repeating-linear-gradient(-55deg,transparent 0,transparent 20px,rgba(201,168,76,0.03) 20px,rgba(201,168,76,0.03) 21px);pointer-events:none}
+.cta-block h2{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:#f0e6cc;letter-spacing:.02em;margin-bottom:.4rem;position:relative;z-index:1}
+.cta-block p{font-size:11px;color:#9a9080;line-height:1.75;margin-bottom:1.1rem;max-width:360px;margin-left:auto;margin-right:auto;position:relative;z-index:1;letter-spacing:.02em}
+.cta-btn{display:inline-block;background:transparent;border:1px solid var(--g);color:var(--g);font-family:'DM Mono',monospace;font-size:12px;padding:.55rem 1.75rem;text-decoration:none;letter-spacing:.14em;position:relative;z-index:1;transition:all .15s}
+.cta-btn:hover{background:var(--g);color:var(--ink)}
+@media(max-width:600px){.cta-block{padding:1.5rem 1.2rem}}
 </style>
 </head>
 <body>
@@ -243,6 +251,13 @@ body{font-family:'DM Mono',monospace;color:var(--w);background:var(--ink);min-he
       <div class="eq-quote">You already have this. Most people just don't see it. The MOAT isn't built — it's discovered. What you just checked off is the starting point.</div>
     </div>
 
+  </div>
+
+  <div class="cta-block">
+    <div class="cta-hatch"></div>
+    <h2>Ready to build around your MOAT?</h2>
+    <p>Urban Unity is coaching and community for clothing brand owners. Bring your edge, and we'll help you build the brand around it.</p>
+    <a class="cta-btn" href="https://urbanunity.io/apply?utm_source=Resource&amp;utm_medium=Direct+application&amp;utm_campaign=Marshall&amp;utm_content=Brand+MOAT+Resource" target="_blank" rel="noopener noreferrer">Apply to Urban Unity →</a>
   </div>
 </div>
 
